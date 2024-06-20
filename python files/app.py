@@ -1,4 +1,3 @@
-# app.py
 from fastapi import FastAPI, UploadFile, File
 import uvicorn
 import torch
@@ -8,7 +7,6 @@ from torchvision import transforms
 from PIL import Image
 import io
 
-# Define your model architecture (Net class)
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
@@ -29,12 +27,12 @@ class Net(nn.Module):
 
 app = FastAPI()
 
-# Load the model
+
 model = Net()
 model.load_state_dict(torch.load('mnist_model.pt'))
 model.eval()
 
-# Define the image transformation
+
 transform = transforms.Compose([
     transforms.Grayscale(num_output_channels=1),
     transforms.ToTensor(),
@@ -43,11 +41,11 @@ transform = transforms.Compose([
 
 @app.post("/predict/")
 async def predict(file: UploadFile = File(...)):
-    # Read the image file
+    
     image = Image.open(io.BytesIO(await file.read()))
-    # Apply transformations
+    
     image = transform(image).unsqueeze(0)
-    # Predict
+    
     with torch.no_grad():
         output = model(image)
         _, predicted = torch.max(output.data, 1)

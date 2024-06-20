@@ -35,3 +35,4 @@ Similar structure with adjusted number of filters and dropout rates to improve p
 # Dataset
 The MNIST dataset consists of 60,000 training images and 10,000 test images of handwritten digits from 0 to 9. Each image is 28x28 pixels in grayscale.
 "# handwritten-digits_mnist" 
+"# handwritten-digits_mnist" 
